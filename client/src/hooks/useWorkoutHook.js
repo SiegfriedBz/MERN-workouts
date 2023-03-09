@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useWorkoutContext } from "./useWorkoutContext";
 
-const SERVER_URI = 'http://localhost:3001/api/workouts'
+import { WORKOUTS_URI } from '../config'
 
-export const useWorkoutFetch = () => {
+export const useWorkoutHook = () => {
     const { workouts, dispatch } = useWorkoutContext()
+
     const [missingFields, setMissingFields] = useState([])
     const [error, setError] = useState(null)
 
     const getWorkouts = async () => {
         try{
-            const response = await fetch(SERVER_URI)
+            const response = await fetch(WORKOUTS_URI)
             const data = await response.json()
             if(!response.ok) {
                 setError(data.error)
@@ -22,7 +23,7 @@ export const useWorkoutFetch = () => {
                 payload: data
             })
         } catch(error) {
-            console.log(error)
+            console.error(error)
         }
     }
 
@@ -46,7 +47,7 @@ export const useWorkoutFetch = () => {
         }
 
         try{
-            const response = await fetch(SERVER_URI, {
+            const response = await fetch(WORKOUTS_URI, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -65,13 +66,13 @@ export const useWorkoutFetch = () => {
                 payload: data
             })
         } catch(error) {
-            console.log(error)
+            console.error(error)
         }
     }
 
     const deleteWorkout = async (_id) => {
         try{
-            const response = await fetch(`${SERVER_URI}/${_id}`, {
+            const response = await fetch(`${WORKOUTS_URI}/${_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
