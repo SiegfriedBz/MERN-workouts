@@ -21,12 +21,65 @@ body {
   background-image: linear-gradient(to right, var(--green-dark),  var(--green));
   box-shadow: 0px 1px 7px -2px var(--green);
   margin: 0;
-  padding: 8px 4px;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.navbar--wrapper ul {
+@media (max-width: 576px) {
+  .navbar--wrapper {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+.navbar--sign-container span a {
+  font-size: 0.8rem;
+  margin: 0 0 0 8px;
+}
+
+.navbar--sign-container button.logout {
+  border-radius: 4px;
+  padding: 4px 8px;
   margin: 0;
-  padding: 4px 24px;
+  color: white;
+  background-color: transparent;
+  border: 0.04rem solid white;
+  transition: color, background-color 0.2s ease-in-out;
+}
+
+.navbar--sign-container button.logout:hover {
+  color: var(--green);
+  background-color: white;
+}
+
+@media (max-width: 576px) {
+  .navbar--sign-container button.logout {
+    margin: 8px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar--sign-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .navbar--sign-container span {
+    margin: 0 0 2px 0;
+  }
+
+  .navbar--sign-container span a {
+    margin: 0;
+  }
+}
+
+.navbar--btn, .navbar--btn i {
+  color: white;
 }
 
 .navbar--item {
@@ -60,7 +113,7 @@ body {
   }
 }
 
-.workout-card {
+.workout-card, .sign-card {
   background-color: white;
   border: none;
   border-radius: 8px;
@@ -68,6 +121,10 @@ body {
   padding: 24px;
   position: relative;
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.05);
+}
+
+.sign-card {
+  max-width: 18rem;
 }
 
 .workout-card h4 {
@@ -88,20 +145,20 @@ body {
   margin: 4px 0 0;
 }
 
-.form-workout {
+form  {
   display: flex;
   flex-direction: column;
 }
 
-.form-workout h4 {
+form h4 {
   font-size: 1.2rem;
   color: var(--green);
   margin-bottom: 8px;
   text-align: center;
 }
 
-.form-workout input {
-  border: none;
+form input {
+  border: 0.04rem solid var(--choco);
   outline: none;
   border-radius: 4px;
   margin: 0 0 8px 0;
@@ -114,7 +171,7 @@ input.error {
   color: black;
 }
 
-.form-workout button {
+form button {
   border: none;
   border-radius: 8px;
   padding: 8px 16px;
@@ -123,7 +180,7 @@ input.error {
   transition: background-color 0.2s ease-in-out;
 }
 
-.form-workout button:hover {
+form button:hover {
   background-color: var(--green);
 }
 
