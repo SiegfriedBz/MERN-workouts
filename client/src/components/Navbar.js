@@ -7,6 +7,9 @@ const Navbar = () => {
                 <Link to='/'>
                     <h1>Workout Buddy</h1>
                 </Link>
+                {/*<Link to='/create'>*/}
+                {/*    <h4>Create WorkoutDetails</h4>*/}
+                {/*</Link>*/}
             </div>
         </header>
     )
