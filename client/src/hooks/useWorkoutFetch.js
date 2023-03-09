@@ -1,10 +1,11 @@
-import { useState, useContext} from "react";
-import {useWorkoutContext} from "./useWorkoutContext";
+import { useState } from "react";
+import { useWorkoutContext } from "./useWorkoutContext";
 
 const SERVER_URI = 'http://localhost:3001/api/workouts'
 
 export const useWorkoutFetch = () => {
     const { workouts, dispatch } = useWorkoutContext()
+    const [missingFields, setMissingFields] = useState([])
     const [error, setError] = useState(null)
 
     const getWorkouts = async () => {
@@ -25,7 +26,25 @@ export const useWorkoutFetch = () => {
         }
     }
 
+    const getMissingFields = (workout) => {
+        let missingFields = []
+        const requiredFields = ['title', 'reps', 'load']
+        requiredFields.forEach(field => {
+            if(!workout[field]) {
+                missingFields.push(field)
+            }
+        })
+        return missingFields
+    }
+
     const addWorkout = async (workout) => {
+        let missingFields = getMissingFields(workout)
+        if(missingFields.length > 0) {
+            setError(`Please fill all the fields`)
+            setMissingFields(missingFields)
+            return null
+        }
+
         try{
             const response = await fetch(SERVER_URI, {
                 method: 'POST',
@@ -35,11 +54,12 @@ export const useWorkoutFetch = () => {
                 body: JSON.stringify(workout)
             })
             const data = await response.json()
-            if(response.status !== 201) {
+            if(response.status === 400) {
                 setError(data.error)
                 return
             }
             setError(null)
+            setMissingFields([])
             dispatch({
                 type: 'CREATE_WORKOUT',
                 payload: data
@@ -71,8 +91,5 @@ export const useWorkoutFetch = () => {
         }
     }
 
-    return [ workouts, error, getWorkouts, addWorkout, deleteWorkout ]
+    return [ workouts, error, missingFields, getWorkouts, addWorkout, deleteWorkout ]
 }
-
-
-
