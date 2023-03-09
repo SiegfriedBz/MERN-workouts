@@ -1,6 +1,6 @@
-
 const WorkoutDetails = ({workout, handleDelete}) => {
     const { _id, title, reps, load, createdAt } = workout
+
     return(
             <div className="workout-card">
                 <div className="content">

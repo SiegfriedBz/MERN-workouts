@@ -1,17 +1,16 @@
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
-    return(
-        <header>
-            <div className="container">
-                <Link to='/'>
-                    <h1>Workout Buddy</h1>
-                </Link>
-                {/*<Link to='/create'>*/}
-                {/*    <h4>Create WorkoutDetails</h4>*/}
-                {/*</Link>*/}
-            </div>
-        </header>
+    return (
+        <nav className="navbar--wrapper">
+            <ul>
+                <li className="navbar--item">
+                    <Link to='/'aria-current="page">
+                        Workout Buddy
+                    </Link>
+                </li>
+            </ul>
+        </nav>
     )
 }
 

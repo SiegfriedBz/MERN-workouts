@@ -1,31 +1,42 @@
-import { useState, useEffect } from "react";
-const SERVER_URI = 'http://localhost:3001/api/workouts'
+import { useEffect } from "react";
+import { useWorkoutFetch } from '../hooks/useWorkoutFetch'
+import WorkoutDetails from '../components/WorkoutDetails'
+import WorkoutForm from "../components/WorkoutForm";
 
 const Home = () => {
-    const [workouts, setWorkouts] = useState([])
+    const [
+        workouts,
+        error,
+        missingFields,
+        getWorkouts,
+        addWorkout,
+        deleteWorkout
+    ] = useWorkoutFetch()
 
     useEffect(() => {
         (async() => {
-            console.log('useEffect()')
-            const response = await fetch(SERVER_URI)
-            if(response.ok) {
-                const data = await response.json()
-                setWorkouts(data)
-            }
+           await getWorkouts()
         })()
     }, [])
-
-    console.log('workouts', workouts)
 
     return(
         <div className="home">
             <div className="workouts">
                 {workouts &&
-                    workouts.map((w) => {
-                        return <p key={w._id}>{w.title}</p>
+                    workouts.map((workout) => {
+                        return (<WorkoutDetails
+                                    key={workout._id}
+                                    workout={workout}
+                                    handleDelete={deleteWorkout}
+                                />)
                     })
                 }
             </div>
+            <WorkoutForm
+                addWorkout={addWorkout}
+                error={error}
+                missingFields={missingFields}
+            />
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 const initWorkout = {title: '', reps: '', load: ''}
 
-const WorkoutForm = ({addWorkout, error}) => {
+const WorkoutForm = ({ addWorkout, error, missingFields }) => {
     const [workout, setWorkout] = useState(initWorkout)
 
     const handleChange = (e) => {
@@ -12,19 +12,27 @@ const WorkoutForm = ({addWorkout, error}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await addWorkout(workout)
-        setWorkout(initWorkout)
+        const response = await addWorkout(workout)
+        if(response !== null) {
+            setWorkout(initWorkout)
+        }
+
+    }
+
+    const inputClass = (field) => {
+        return missingFields.includes(field) ? 'error' : ''
     }
 
     return(
         <form
             className='form-workout'
             onSubmit={handleSubmit}>
-            <h1>Add New Workout</h1>
+            <h4>Add a New Workout</h4>
             <label htmlFor="title">Title</label>
             <input
                 id='title'
                 name='title'
+                className={inputClass('title')}
                 type="text"
                 value={workout.title}
                 onChange={handleChange}
@@ -33,6 +41,7 @@ const WorkoutForm = ({addWorkout, error}) => {
             <input
                 id='reps'
                 name='reps'
+                className={inputClass('reps')}
                 type="number"
                 value={workout.reps}
                 onChange={handleChange}
@@ -41,6 +50,7 @@ const WorkoutForm = ({addWorkout, error}) => {
             <input
                 id='load'
                 name='load'
+                className={inputClass('load')}
                 type="number"
                 value={workout.load}
                 onChange={handleChange}
