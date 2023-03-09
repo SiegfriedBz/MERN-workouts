@@ -1,10 +1,14 @@
-/* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
-/* layout */
 :root {
-  --primary: #1aac83;
-  --error: #e7195a;
+  --green: rgba(26, 172, 131, 1);
+  --green-dark: rgba(26, 172, 131, 0.8);
+  --choco: rgba(85, 85, 85, 1);
+  --error: rgba(231, 25, 90, 1);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -13,26 +17,137 @@ body {
   font-family: "Poppins";
 }
 
-header {
-  background: #fff;
+.navbar--wrapper {
+  background-image: linear-gradient(to right, var(--green-dark),  var(--green));
+  box-shadow: 0px 1px 7px -2px var(--green);
+  margin: 0;
+  padding: 8px 4px;
 }
 
-header .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.navbar--wrapper ul {
+  margin: 0;
+  padding: 4px 24px;
 }
 
-header a {
-  color: #333;
+.navbar--item {
+  list-style: none;
+}
+
+.navbar--item a {
   text-decoration: none;
+  font-size: 18px;
+  font-weight: bolder;
+  color: #f1f1f1;
+  transition: color 0.2s ease-in-out;
 }
 
 .pages{
   max-width: 1400px;
-  padding: 20px;
+  padding: 24px;
   margin: 0 auto;
+}
+
+.home {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 96px;
+}
+
+@media (max-width: 576px) {
+  .home {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.workout-card {
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  margin: 0 auto 24px;
+  padding: 24px;
+  position: relative;
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.05);
+}
+
+.workout-card h4 {
+  font-size: 1.2rem;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+
+.workout-card p {
+  font-size: 0.9rem;
+  color: var(--choco);
+  margin: 0;
+}
+
+.workout-card p.date {
+  font-size: 0.9rem;
+  color: var(--choco);
+  margin: 4px 0 0;
+}
+
+.form-workout {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-workout h4 {
+  font-size: 1.2rem;
+  color: var(--green);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.form-workout input {
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  margin: 0 0 8px 0;
+  padding: 4px 8px;
+}
+
+input.error {
+  border: 0.08rem solid var(--error);
+  background-color: white;
+  color: black;
+}
+
+.form-workout button {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: white;
+  background-color: var(--green-dark);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.form-workout button:hover {
+  background-color: var(--green);
+}
+
+.workout-card button {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+}
+
+.workout-card button i {
+  color: orange;
+  transition: color 0.2s ease-in-out;
+}
+
+.workout-card button:hover i {
+  color: red;
+}
+
+.error {
+  text-align: center;
+  padding: 8px;
+  margin: 16px 0;
+  background-color: #ffefef;
+  border-radius: 4px;
+  color: var(--error);
 }
