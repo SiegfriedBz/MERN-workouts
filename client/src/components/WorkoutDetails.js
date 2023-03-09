@@ -1,3 +1,5 @@
+import { formatDistanceToNow } from "date-fns";
+
 const WorkoutDetails = ({workout, handleDelete}) => {
     const { _id, title, reps, load, createdAt } = workout
 
@@ -7,7 +9,9 @@ const WorkoutDetails = ({workout, handleDelete}) => {
                     <h4>{title}</h4>
                     <p><strong>Reps: </strong>{reps}</p>
                     <p><strong>Load (kg): </strong>{load}</p>
-                    <p className='date'>{new Date(createdAt).toLocaleString()}</p>
+                    <p className='date'>
+                        {formatDistanceToNow(new Date(createdAt), {addSuffix: true})}
+                    </p>
                 </div>
                 <button
                     onClick={() => {handleDelete(_id)}}

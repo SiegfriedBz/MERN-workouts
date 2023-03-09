@@ -17,7 +17,7 @@ const Home = () => {
         (async() => {
            await getWorkouts()
         })()
-    }, [])
+    }, [getWorkouts])
 
     return(
         <div className="home">
