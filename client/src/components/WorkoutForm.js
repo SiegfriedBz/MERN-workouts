@@ -25,7 +25,6 @@ const WorkoutForm = ({ addWorkout, error, missingFields }) => {
 
     return(
         <form
-            className='form-workout'
             onSubmit={handleSubmit}>
             <h4>Add a New Workout</h4>
             <label htmlFor="title">Title</label>

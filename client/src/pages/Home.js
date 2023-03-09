@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useWorkoutFetch } from '../hooks/useWorkoutFetch'
+import { useWorkoutHook } from '../hooks/useWorkoutHook'
 import WorkoutDetails from '../components/WorkoutDetails'
 import WorkoutForm from "../components/WorkoutForm";
 
@@ -11,7 +11,7 @@ const Home = () => {
         getWorkouts,
         addWorkout,
         deleteWorkout
-    ] = useWorkoutFetch()
+    ] = useWorkoutHook()
 
     useEffect(() => {
         (async() => {
