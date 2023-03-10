@@ -1,43 +1,42 @@
-import { useEffect } from "react";
-import { useWorkoutHook } from '../hooks/useWorkoutHook'
+import { useEffect } from 'react'
+import { useAuthContext } from '../hooks/useAuthContext'
+import { useWorkout } from '../hooks/useWorkout'
 import WorkoutDetails from '../components/WorkoutDetails'
-import WorkoutForm from "../components/WorkoutForm";
+import WorkoutForm from '../components/WorkoutForm'
 
 const Home = () => {
-    const [
-        workouts,
-        error,
-        missingFields,
-        getWorkouts,
-        addWorkout,
-        deleteWorkout
-    ] = useWorkoutHook()
+    const { user } = useAuthContext()
+    const { workouts, error, missingFields, getWorkouts, addWorkout, deleteWorkout } = useWorkout()
 
     useEffect(() => {
         (async() => {
-           await getWorkouts()
+            if(user) {
+                await getWorkouts()
+            }
         })()
-    }, [getWorkouts])
+    }, [user])
 
     return(
-        <div className="home">
-            <div className="workouts">
-                {workouts &&
-                    workouts.map((workout) => {
-                        return (<WorkoutDetails
-                                    key={workout._id}
-                                    workout={workout}
-                                    handleDelete={deleteWorkout}
-                                />)
-                    })
-                }
+        <>
+            {error && <div className="error">{error}</div>}
+            <div className="home">
+                <div className="workouts">
+                    {workouts &&
+                        workouts.map((workout) => {
+                            return (<WorkoutDetails
+                                key={workout._id}
+                                workout={workout}
+                                handleDelete={deleteWorkout}
+                            />)
+                        })
+                    }
+                </div>
+                <WorkoutForm
+                    addWorkout={addWorkout}
+                    missingFields={missingFields}
+                />
             </div>
-            <WorkoutForm
-                addWorkout={addWorkout}
-                error={error}
-                missingFields={missingFields}
-            />
-        </div>
+        </>
     )
 }
 
