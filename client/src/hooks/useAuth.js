@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
-import { USER_URI } from "../config";
+import { USER_URI } from '../config'
 
 export const useAuth = () => {
     const { dispatch } = useAuthContext()
