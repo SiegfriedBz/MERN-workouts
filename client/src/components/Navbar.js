@@ -1,6 +1,6 @@
+import { useAuthContext } from '../hooks/useAuthContext'
+import { useAuth } from '../hooks/useAuth'
 import { Link } from 'react-router-dom'
-import { useAuthContext } from "../hooks/useAuthContext"
-import { useAuth } from "../hooks/useAuth"
 
 const Navbar = () => {
     const { user } = useAuthContext()
