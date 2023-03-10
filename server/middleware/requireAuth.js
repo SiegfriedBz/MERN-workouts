@@ -1,5 +1,5 @@
-import User from '../models/userModel'
-import jwt from 'jsonwebtoken'
+const User = require('../models/userModel')
+const jwt = require('jsonwebtoken')
 
 const requireAuth = async (req, res, next) => {
     const { authorization } = req.headers
