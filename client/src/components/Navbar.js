@@ -52,23 +52,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-
-            {/*<nav className="navbar--wrapper">*/}
-            {/*        <span className="navbar--item">*/}
-            {/*            <Link to='/'aria-current="page">*/}
-            {/*                Workout Buddy*/}
-            {/*            </Link>*/}
-            {/*        </span>*/}
-            {/*    <div>*/}
-            {/*        <span className="navbar--item">*/}
-            {/*            <Link to='/login'aria-current="page">*/}
-            {/*                Login*/}
-            {/*            </Link>*/}
-            {/*        </span>*/}
-            {/*        <span className="navbar--item">*/}
-            {/*            <Link to='/signup'aria-current="page">*/}
-            {/*                Signup*/}
-            {/*            </Link>*/}
-            {/*        </span>*/}
-            {/*    </div>*/}
-            {/*</nav>*/}
