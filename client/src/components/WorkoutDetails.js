@@ -1,4 +1,4 @@
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow } from 'date-fns'
 
 const WorkoutDetails = ({workout, handleDelete}) => {
     const { _id, title, reps, load, createdAt } = workout
@@ -14,7 +14,7 @@ const WorkoutDetails = ({workout, handleDelete}) => {
                     </p>
                 </div>
                 <button
-                    onClick={() => {handleDelete(_id)}}
+                    onClick={() => handleDelete(_id)}
                 >
                     <i className='fa-solid fa-trash-can'></i>
                 </button>
