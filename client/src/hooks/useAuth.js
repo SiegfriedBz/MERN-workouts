@@ -1,67 +1,56 @@
 import { useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
-
 import { USER_URI } from "../config";
 
-export const useAuthHook = () => {
-    const { dispatch }= useAuthContext()
+export const useAuth = () => {
+    const { dispatch } = useAuthContext()
 
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
 
-    const login = async(userInput) => {
+    const auth = async (userInput, path) => {
+        const response = await fetch(`${USER_URI}/${path}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userInput)
+        })
+        if (response.status === 200 || response.status === 201) {
+            const data = await response.json()
+            // save user: { email, token } to local storage
+            localStorage.setItem("user", JSON.stringify(data))
+            // update Auth Context state
+            dispatch({
+                type: 'LOGIN',
+                payload: data
+            })
+            setIsLoading(false)
+        }
+    }
+
+    const signup = async (userInput) => {
         setIsLoading(true)
         setError(null)
         try{
-            const response = await fetch(`${USER_URI}/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userInput)
-            })
-            if (response.ok) {
-                const data = await response.json()
-                dispatch({
-                    type: 'LOGIN',
-                    payload: data
-                })
-                setIsLoading(false)
-            }
+            await auth(userInput, 'signup')
         } catch(error){
             console.error(error)
         }
     }
 
-    const signup = async(userInput) => {
+    const login = async (userInput) => {
         setIsLoading(true)
         setError(null)
         try{
-            const response = await fetch(`${USER_URI}/signup`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userInput)
-            })
-            const data = await response.json()
-
-            if (response.status !== 201) {
-                setIsLoading(false)
-                setError(data.error)
-            } else {
-                // save user: { email, token } to local storage
-                localStorage.setItem("user", JSON.stringify(data))
-                // update Auth Context state
-                dispatch({ type: 'LOGIN', payload: data })
-                setIsLoading(false)
-            }
+            await auth(userInput, 'login')
         } catch(error){
             console.error(error)
         }
     }
 
     const logOut = () => {
+        // remove user: { email, token } from local storage
         localStorage.removeItem("user")
         // update Auth Context state
         dispatch({ type: 'LOGOUT' })
