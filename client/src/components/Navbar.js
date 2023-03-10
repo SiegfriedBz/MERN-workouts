@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useAuthContext } from "../hooks/useAuthContext"
-import { useAuthHook } from "../hooks/useAuthHook"
+import { useAuth } from "../hooks/useAuth"
 
 const Navbar = () => {
     const { user } = useAuthContext()
-    const { logOut } = useAuthHook()
+    const { logOut } = useAuth()
 
     return (
         <div className="navbar--wrapper">
