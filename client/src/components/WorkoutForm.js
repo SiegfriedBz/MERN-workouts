@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react'
 const initWorkout = {title: '', reps: '', load: ''}
 
-const WorkoutForm = ({ addWorkout, error, missingFields }) => {
+const WorkoutForm = ({ addWorkout, missingFields }) => {
     const [workout, setWorkout] = useState(initWorkout)
 
     const handleChange = (e) => {
@@ -11,12 +11,11 @@ const WorkoutForm = ({ addWorkout, error, missingFields }) => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+    e.preventDefault()
         const response = await addWorkout(workout)
         if(response !== null) {
             setWorkout(initWorkout)
         }
-
     }
 
     const inputClass = (field) => {
@@ -57,7 +56,6 @@ const WorkoutForm = ({ addWorkout, error, missingFields }) => {
             <button type='submit'>
                 Create Workout
             </button>
-            {error && <div className="error">{error}</div>}
         </form>
     )
 }
