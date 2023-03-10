@@ -2,9 +2,12 @@ const Workout = require('../models/workoutModel')
 const mongoose = require('mongoose')
 
 const getWorkouts = async (req, res) => {
+    // get userId from requireAuth middleware
+    const user_id = req.user_id
+
     try{
         const workouts = await Workout
-            .find({})
+            .find({ user_id })
             .sort({ createdAt: -1 })
         res.status(200).json(workouts)
     } catch(error) {
@@ -14,9 +17,11 @@ const getWorkouts = async (req, res) => {
 
 const createWorkout = async (req, res) => {
     const { title, reps, load } = req.body
+    // get userId from requireAuth middleware
+    const user_id = req.user_id
 
     try{
-        const newWorkout = await Workout.create({title, reps, load})
+        const newWorkout = await Workout.create({ user_id, title, reps, load })
         res.status(201).json(newWorkout)
     } catch(error) {
         res.status(400).json({error: error.message})
@@ -50,7 +55,7 @@ const deleteWorkout = async (req, res) => {
     }
         try{
             const workout = await Workout.findOneAndDelete(
-                {_id: id},
+                { _id: id },
                 { returnDocument: 'after' }
             )
             if(!workout) {
