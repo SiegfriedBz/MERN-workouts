@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { useWorkoutContext } from "./useWorkoutContext";
 import { USER_URI } from '../config'
 
 export const useAuth = () => {
     const { dispatch } = useAuthContext()
+    const { dispatch: dispatchToWorkout } = useWorkoutContext()
 
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -54,6 +56,8 @@ export const useAuth = () => {
         localStorage.removeItem("user")
         // update Auth Context state
         dispatch({ type: 'LOGOUT' })
+        // update Workout Context state
+        dispatchToWorkout({ type: 'SET_WORKOUTS', payload: [] })
     }
 
     return { login, signup, logOut, error, isLoading }
