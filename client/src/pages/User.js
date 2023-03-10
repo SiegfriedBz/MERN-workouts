@@ -1,6 +1,5 @@
-import { useState } from "react"
 import { useLocation } from 'react-router-dom'
-import { useAuthHook } from "../hooks/useAuthHook";
+import { useAuth } from '../hooks/useAuth'
 import UserForm from '../components/UserForm'
 import { spinner } from '../utils/spinner'
 
@@ -10,7 +9,7 @@ const PATH = {
 }
 
 const User = () => {
-    const { login, signup, error, isLoading }  = useAuthHook()
+    const { login, signup, error, isLoading }  = useAuth()
 
     const location = useLocation();
     const path = PATH[location.pathname]
