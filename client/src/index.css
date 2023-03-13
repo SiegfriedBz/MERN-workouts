@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+:root {
+  --green: rgba(26, 172, 131, 1);
+  --green-dark: rgba(26, 172, 131, 0.8);
+  --gray-light: rgba(241, 241, 241, 1);
+  --choco: rgba(85, 85, 85, 1);
+  --orange: rgba(255, 184, 0, 1);
+  --error: rgba(231, 25, 90, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--gray-light);
+  margin: 0;
+  font-family: "Poppins";
+}
+
+.navbar--wrapper {
+  background-image: linear-gradient(to right, var(--green-dark),  var(--green));
+  box-shadow: 0px 1px 7px -2px var(--green);
+  margin: 0;
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 576px) {
+  .navbar--wrapper {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+.navbar--sign-container span a {
+  font-size: 0.8rem;
+  margin: 0 0 0 8px;
+}
+
+.navbar--sign-container button.logout {
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin: 0;
+  color: var(--gray-light);
+  background-color: transparent;
+  border: 0.04rem solid var(--gray-light);
+  transition: color, background-color 0.2s ease-in-out;
+}
+
+.navbar--sign-container button.logout:hover {
+  color: var(--green);
+  background-color: var(--gray-light);
+}
+
+@media (max-width: 576px) {
+  .navbar--sign-container button.logout {
+    margin: 8px 0;
+  }
+
+  .navbar--sign-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .navbar--sign-container span {
+    margin: 0 0 2px 0;
+  }
+
+  .navbar--sign-container span a {
+    margin: 0;
+  }
+}
+
+.navbar--btn, .navbar--btn i {
+  color: var(--gray-light);
+}
+
+.navbar--item {
+  list-style: none;
+}
+
+.navbar--item a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bolder;
+  color: var(--gray-light);
+  transition: color 0.2s ease-in-out;
+}
+
+.navbar--item a:hover {
+  color: var(--orange);
+}
+
+.pages{
+  max-width: 1400px;
+  padding: 24px;
+  margin: 0 auto;
+}
+
+.home {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 96px;
+}
+
+@media (max-width: 576px) {
+  .home {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.workout-card, .sign-card {
+  background-color: var(--gray-light);
+  border: none;
+  border-radius: 8px;
+  margin: 0 auto 24px;
+  padding: 24px;
+  position: relative;
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.05);
+}
+
+.sign-card {
+  max-width: 18rem;
+}
+
+.workout-card h4 {
+  font-size: 1.2rem;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+
+.workout-card p {
+  font-size: 0.9rem;
+  color: var(--choco);
+  margin: 0;
+}
+
+.workout-card p.date {
+  font-size: 0.9rem;
+  color: var(--choco);
+  margin: 4px 0 0;
+}
+
+form  {
+  display: flex;
+  flex-direction: column;
+}
+
+form h4 {
+  font-size: 1.2rem;
+  color: var(--green);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+form input {
+  border: 0.04rem solid var(--green);
+  outline: none;
+  border-radius: 4px;
+  margin: 0 0 8px 0;
+  padding: 4px 8px;
+}
+
+input.error {
+  border: 0.08rem solid var(--error);
+  background-color: var(--gray-light);
+  color: var(--choco);
+}
+
+form button {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: var(--gray-light);
+  background-color: var(--green-dark);
+  transition: background-color 0.2s ease-in-out;
+}
+
+form button:hover {
+  background-color: var(--green);
+}
+
+.workout-card button {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+}
+
+.workout-card button i {
+  color: orange;
+  transition: color 0.2s ease-in-out;
+}
+
+.workout-card button:hover i {
+  color: red;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 24px;
+  background-image: linear-gradient(to right, var(--green-dark),  var(--green));
+  box-shadow: 0px -1px 7px -2px var(--green);
+  color: var(--gray-light);
+}
+
+footer .footer--links span {
+  margin: auto 0 auto 8px;
+}
+
+footer span a {
+  color: var(--gray-light);
+}
+
+footer span:hover, span a:hover {
+  color: var(--orange);
+}
+
+footer span a i {
+  font-size: 24px;
+}
+
+.error {
+  text-align: center;
+  padding: 8px;
+  margin: 16px 0;
+  background-color: var(--gray-light);
+  border-radius: 4px;
+  color: var(--error);
+}
